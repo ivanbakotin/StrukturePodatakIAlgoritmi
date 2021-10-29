@@ -77,8 +77,8 @@ void reverse(char* s1, char* s2) {
 
 void main(void) {
     char string1[30] = "aa";
-    char string2[30] = "big_str33";
-    char string3[30] = "sub_str12";
+    char string2[30] = "Hello";
+    char string3[30] = "ello";
 
     //printf("My strlen: %d\n", mystrlen(string1));
     //printf("C strlen: %d \n", strlen(string1));
@@ -96,8 +96,8 @@ void main(void) {
     //strcat(string2, string3);
     //printf("Strcat: %s\n", string2);
 
-    char *res = mystrstr(string2, string3);
-    printf("%c\n", res);
+    printf("Mystrstr: %s\n", mystrstr(string2, string3));
+    printf("Strstr: %s\n", strstr(string2, string3));
 
     //reverse(string2, string3);  
     //printf("After reversing the string: %s\n", string3);  
