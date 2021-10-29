@@ -39,19 +39,26 @@ void mystrcat(char *s1, char *s2) {
 
 char* mystrstr(char* s1, char* s2) {
 
-    char* p = s1;
-    int i, j;
+    char *a = s1;
+    char *b = s2;
 
-    for (i = 0; s1[i] != '\0'; i++) {
-        for (j = 0; s1[i + j] == s2[j]; j++) {
-            p = &s1[i];
-            if (s2[j + 1] == '\0') {        
-                return p;
-            }
+    for( ; *s1 != '\0'; *s1++) {
+      if(*s1 != *b) {
+        continue;
+      }
+
+      a = s1;
+      while(1) {
+        if(*b == '\0') {
+          return s1;
+        } else if(*a++ != *b++) {
+          break;
         }
+      }
+      b = s2;
     }
 
-    return p;
+    return (char *) NULL;
 }
 
 void reverse(char* s1, char* s2) {
@@ -60,7 +67,7 @@ void reverse(char* s1, char* s2) {
 
     int len = mystrlen(s1);
 
-    for (i = 0; s1[i] != '\0'; ++i) {
+    for (i = 0; s1[i] != '\0'; i++) {
  
         s2[i] = s1[len - 1 - i];
     }
@@ -70,8 +77,8 @@ void reverse(char* s1, char* s2) {
 
 void main(void) {
     char string1[30] = "aa";
-    char string2[30] = "Hello";
-    char string3[30] = "aaabbaa";
+    char string2[30] = "big_str33";
+    char string3[30] = "sub_str12";
 
     //printf("My strlen: %d\n", mystrlen(string1));
     //printf("C strlen: %d \n", strlen(string1));
@@ -89,9 +96,9 @@ void main(void) {
     //strcat(string2, string3);
     //printf("Strcat: %s\n", string2);
 
-    //char *res = mystrstr(string2, string3);
-    //printf("%d\n", res);
+    char *res = mystrstr(string2, string3);
+    printf("%c\n", res);
 
-    reverse(string2, string3);  
-    printf("After reversing the string: %s\n", string3);  
+    //reverse(string2, string3);  
+    //printf("After reversing the string: %s\n", string3);  
 };
