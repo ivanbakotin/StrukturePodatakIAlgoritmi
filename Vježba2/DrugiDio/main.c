@@ -13,27 +13,27 @@ typedef struct {
 
 Polygon *novi_poligon(float *niz_x, float *niz_y, int n) {
 
-    Polygon *myPoly = (Polygon*)malloc(sizeof(Polygon));
+    Polygon *my_polygon = (Polygon*)malloc(sizeof(Polygon));
 
-    myPoly->vrh = (Tocka*)malloc(n * sizeof(Tocka));
+    my_polygon->vrh = (Tocka*)malloc(n * sizeof(Tocka));
 
     for (int i = 0; i < n; i++) {
-        myPoly->vrh[i].x = niz_x[i];
-        myPoly->vrh[i].y = niz_y[i];
+        my_polygon->vrh[i].x = niz_x[i];
+        my_polygon->vrh[i].y = niz_y[i];
     }
 
-    return myPoly;
+    return my_polygon;
 }
 
 Tocka **pozitivni(Polygon *p, int *np) {
 
-    int brojac = 0;
+    int counter = 0;
 
     for (int i = 0; i < (p->n); i++) {
-        if ((p->vrh[i].x > 0) && (p->vrh[i].y > 0)) brojac++;
+        if ((p->vrh[i].x > 0) && (p->vrh[i].y > 0)) counter++;
     }
 
-    Tocka** pt = (Tocka**)malloc(sizeof(Tocka*) * brojac);
+    Tocka** pt = (Tocka**)malloc(sizeof(Tocka*) * counter);
 
     for (int i = 0, j = 0; i < (p->n); i++) {
         if ((p->vrh[i].x > 0) && (p->vrh[i].y > 0)) {
@@ -42,13 +42,12 @@ Tocka **pozitivni(Polygon *p, int *np) {
         }
     }
 
-    *np = brojac;
+    *np = counter;
 
     return pt;
 }
 
-void main()
-{
+void main() {
     float nizX[] = { 3, 5, -4, 7 };
     float nizY[] = { 5, -4, 3, -1 };
 
