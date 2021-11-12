@@ -52,8 +52,6 @@ Objekt3D *createObjectBin() {
 void createTxtFile(Objekt3D *txt) {
     FILE *fp = fopen("objekttxt.stl", "wt");
 
-    if (!fp) perror("No file found");
-    
     fprintf(fp, "solid \n");
 
     for (int i = 0; i < (txt->n); i++) {
@@ -71,8 +69,6 @@ void createTxtFile(Objekt3D *txt) {
 
 void createBinFile(Objekt3D *bin) {
     FILE *fp = fopen("objektbin.stl", "wb");
-
-    if (!fp) perror("No file found!");
 
     char buffer[80] = { 0 };
 
