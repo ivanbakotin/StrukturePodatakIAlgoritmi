@@ -49,17 +49,17 @@ Objekt3D *createObjectBin() {
     return object;
 }
 
-void createTxtFile(Objekt3D *txt) {
-    FILE *fp = fopen("objekttxt.stl", "wt");
+void createTxtFile(Objekt3D *object) {
+    FILE *fp = fopen("objektobject.stl", "wt");
 
     fprintf(fp, "solid \n");
 
-    for (int i = 0; i < (txt->n); i++) {
-        fprintf(fp, "facet normal %f %f %f\n", txt->niz[i].normala.x, txt->niz[i].normala.y, txt->niz[i].normala.z);
+    for (int i = 0; i < (object->n); i++) {
+        fprintf(fp, "facet normal %f %f %f\n", object->niz[i].normala.x, object->niz[i].normala.y, object->niz[i].normala.z);
         fprintf(fp, "outer loop\n");
-        fprintf(fp, "vertex %f %f %f\n", txt->niz[i].vrh_a.x, txt->niz[i].vrh_a.y, txt->niz[i].vrh_a.z);
-        fprintf(fp, "vertex %f %f %f\n", txt->niz[i].vrh_b.x, txt->niz[i].vrh_b.y, txt->niz[i].vrh_b.z);
-        fprintf(fp, "vertex %f %f %f\n", txt->niz[i].vrh_c.x, txt->niz[i].vrh_c.y, txt->niz[i].vrh_c.z);
+        fprintf(fp, "vertex %f %f %f\n", object->niz[i].vrh_a.x, object->niz[i].vrh_a.y, object->niz[i].vrh_a.z);
+        fprintf(fp, "vertex %f %f %f\n", object->niz[i].vrh_b.x, object->niz[i].vrh_b.y, object->niz[i].vrh_b.z);
+        fprintf(fp, "vertex %f %f %f\n", object->niz[i].vrh_c.x, object->niz[i].vrh_c.y, object->niz[i].vrh_c.z);
         fprintf(fp, "endloop\n");
         fprintf(fp, "endfacet\n");
     }
@@ -67,16 +67,16 @@ void createTxtFile(Objekt3D *txt) {
     fclose(fp);
 }
 
-void createBinFile(Objekt3D *bin) {
+void createBinFile(Objekt3D *object) {
     FILE *fp = fopen("objektbin.stl", "wb");
 
-    char buffer[80] = { 0 };
+    char header[80] = { 0 };
 
-    fwrite(buffer, sizeof(char), 80, fp);
-    fwrite(&(bin->n), sizeof(int), 1, fp);
+    fwrite(header, sizeof(char), 80, fp);
+    fwrite(&(object->n), sizeof(int), 1, fp);
 
-    for (int i = 0; i < bin->n; i++) {
-        fwrite(&(bin->niz[i]), 50, 1, fp);
+    for (int i = 0; i < object->n; i++) {
+        fwrite(&(object->niz[i]), 50, 1, fp);
     }
 
     fclose(fp);
