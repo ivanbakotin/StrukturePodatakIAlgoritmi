@@ -133,8 +133,10 @@ int *presjek_oba_sortirana(int *niz_1, int *niz_2, int n, int *counter) {
 
 void main() {
 
+    clock_t time_req;
+
     int counter = 0;
-    int array_size = 10000;
+    int array_size = 1000000;
 
     srand(time(NULL));
 
@@ -148,7 +150,9 @@ void main() {
 
     //int *presjek_2 = presjek_jedan_sortiran(niz_1, niz_2, array_size, &counter);
 
+    time_req = clock();
     int *presjek_3 = presjek_oba_sortirana(niz_1, niz_2, array_size, &counter);
-
-    print(presjek_3, counter);
+    free(presjek_3);
+    time_req = clock() - time_req;
+    printf("Time taken in seconds: %f \n", (double)time_req / CLOCKS_PER_SEC);
 }
