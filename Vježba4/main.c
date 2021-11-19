@@ -31,16 +31,6 @@ int cmpfunc (const void * a, const void * b) {
    return ( *(int*)a - *(int*)b );
 }
 
-int checkArrayContains(int *niz, int n, int element) {
-    for (int i = 0; i < n; i++) {
-        if (niz[i] == element) {
-            return 1;
-        }
-    }
-
-    return 0;
-}
-
 int *presjek(int *niz_1, int *niz_2, int n, int *counter){
 
     int *dupli = (int*)malloc(sizeof(int) * n);
@@ -49,14 +39,9 @@ int *presjek(int *niz_1, int *niz_2, int n, int *counter){
         for (int j = 0; j < n; j++) {
             if (niz_1[i] == niz_2[j]) {
 
-                int element = niz_1[i];
-                int isInside = checkArrayContains(dupli, *counter, element);
-
-                if (!isInside) {
-                    dupli[*counter] = niz_1[i];
-                    (*counter)++;
-                    break;
-                }
+                dupli[*counter] = niz_1[i];
+                (*counter)++;
+                break;   
             }
         }
     }
@@ -78,13 +63,8 @@ int *presjek_jedan_sortiran(int *niz_1, int *niz_2, int n, int *counter) {
        
         if (item) {
 
-            int element = niz_1[i];
-            int isInside = checkArrayContains(dupli, *counter, element);
-
-            if (!isInside) {
-                dupli[*counter] = niz_1[i];
-                (*counter)++;
-            }
+            dupli[*counter] = niz_1[i];
+            (*counter)++;
         }
     }
  
@@ -103,17 +83,12 @@ int *presjek_oba_sortirana(int *niz_1, int *niz_2, int n, int *counter) {
     int counter_1 = 0;
     int counter_2 = 0;
 
-    while (counter_1 < n  || counter_2 < n) {
+    while (counter_1 < n  && counter_2 < n) {
 
         if (niz_1[counter_1] == niz_2[counter_2]) {
-
-            int element = niz_1[counter_1];
-            int isInside = checkArrayContains(dupli, *counter, element);
-
-            if (!isInside) {
-                dupli[*counter] = niz_1[counter_1];
-                (*counter)++;
-            }
+           
+            dupli[*counter] = niz_1[counter_1];
+            (*counter)++;
 
             counter_1++;
             counter_2++;
@@ -133,10 +108,10 @@ int *presjek_oba_sortirana(int *niz_1, int *niz_2, int n, int *counter) {
 
 void main() {
 
-    clock_t time_req;
+    clock_t time_algo;
 
     int counter = 0;
-    int array_size = 1000000;
+    int array_size = 900000;
 
     srand(time(NULL));
 
@@ -146,13 +121,21 @@ void main() {
     shuffle(niz_1, array_size);
     shuffle(niz_2, array_size);
 
-    //int *presjek_1 = presjek(niz_1, niz_2, array_size, &counter);
+    time_algo = clock();
+    int *presjek_1 = presjek(niz_1, niz_2, array_size, &counter);
+    free(presjek_1);
+    time_algo = clock() - time_algo;
+    printf("1. Time taken in seconds: %f \n", (double)time_algo / CLOCKS_PER_SEC);
 
+    //time_algo = clock();
     //int *presjek_2 = presjek_jedan_sortiran(niz_1, niz_2, array_size, &counter);
+    //free(presjek_2);
+    //time_algo = clock() - time_algo;
+    //printf("2. Time taken in seconds: %f \n", (double)time_algo / CLOCKS_PER_SEC);
 
-    time_req = clock();
-    int *presjek_3 = presjek_oba_sortirana(niz_1, niz_2, array_size, &counter);
-    free(presjek_3);
-    time_req = clock() - time_req;
-    printf("Time taken in seconds: %f \n", (double)time_req / CLOCKS_PER_SEC);
+    //time_algo = clock();
+    //int *presjek_3 = presjek_oba_sortirana(niz_1, niz_2, array_size, &counter);
+    //free(presjek_3);
+    //time_algo = clock() - time_algo;
+    //printf("3. Time taken in seconds: %f \n", (double)time_algo / CLOCKS_PER_SEC);
 }
